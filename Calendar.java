@@ -1,39 +1,45 @@
-/*
- * Checks if a given year is a leap year or a common year,
- * and computes the number of days in a given month and a given year. 
- */
-public class Calendar0 {	
+
+public class Calendar {	
+	static int dayOfMonth = 1;   
+	static int month = 1;
+	static int dayOfWeek = 2;     // 1.1.1900 was a Monday
 	
-	// Gets a year (command-line argument), and tests the functions isLeapYear and nDaysInMonth.
+	/** 
+	 * Prints the calendar of a given year from a command-line argument
+	 */
 	public static void main(String args[]) {
+
 		int year = Integer.parseInt(args[0]);
-		isLeapYearTest(year);
-		nDaysInMonthTest(year);
-	}
-		 
-	// Tests the isLeapYear function.
-	private static void isLeapYearTest(int year) {
-		String commonOrLeap = "common";
-		if (isLeapYear(year)) {
-			commonOrLeap = "leap";
-		}
-		System.out.println(year + " is a " + commonOrLeap + " year");  
-	}
 
-	// Tests the nDaysInMonth function.
-	private static void nDaysInMonthTest(int year) {
-		int y = year;
-		for (int i = 1; i <= 12 ; i++) {
+		while(month <= 12)
+		{
+			int daysInMonth = nDaysInMonth(month, year); 
 
-			System.out.println("Month " + i + " has " + nDaysInMonth(i,y) + " days");
+			for (int i = 1; i <= daysInMonth ;i++ ) {
+
+			if (dayOfWeek == 1) {
+                   	System.out.println(i + "/" + month + "/" + year + " Sunday");
+                   }
+                  
+                    else {
+                        System.out.println(i + "/" + month + "/" + year);
+                    }
+
+		dayOfWeek = (dayOfWeek % 7) + 1;
 			
 		}
-	}
+		month++;
 
-	// Returns true if the given year is a leap year, false otherwise.
-	public static boolean isLeapYear(int year) {
 
-		int y = year; 
+		}
+
+		
+	 
+}
+	
+    // Returns true if the given year is a leap year, false otherwise.
+	private static boolean isLeapYear(int year) {
+	   int y = year; 
 
 		if(((y % 400) == 0) || ((y % 4) == 0) && ((y % 100) != 0))
 			return true;
@@ -45,8 +51,8 @@ public class Calendar0 {
 	// April, June, September, and November have 30 days each.
 	// February has 28 days in a common year, and 29 days in a leap year.
 	// All the other months have 31 days.
-	public static int nDaysInMonth(int month, int year) {
-
+	private static int nDaysInMonth(int month, int year) {
+		
 		int m = month;
 		int y = year;
 
@@ -76,6 +82,5 @@ public class Calendar0 {
 
         return 0;
 
-		}
-	
+	}
 }
